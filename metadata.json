@@ -1,0 +1,5 @@
+{
+  "name": "Simulador de Juros Compostos",
+  "description": "Uma calculadora completa de juros compostos com gráficos de evolução, tabelas detalhadas e guia educativo.",
+  "requestFramePermissions": []
+}
