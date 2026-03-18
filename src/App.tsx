@@ -250,62 +250,67 @@ export default function App() {
                   </div>
                 </div>
               </div>
-              <div className="h-[400px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={results.evolution} margin={{ top: 20, right: 20, left: 20, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#333" />
-                    <XAxis 
-                      dataKey="month" 
-                      axisLine={false} 
-                      tickLine={false} 
-                      tick={{ fontSize: 12, fill: '#666' }}
-                      label={{ value: periodType === 'years' ? 'Meses' : 'Período', position: 'insideBottom', offset: -5, fill: '#666' }}
-                    />
-                    <YAxis 
-                      axisLine={false} 
-                      tickLine={false} 
-                      tick={{ fontSize: 12, fill: '#666' }}
-                      tickFormatter={(value) => `R$ ${value >= 1000 ? (value / 1000).toFixed(0) + 'k' : value}`}
-                    />
-                    <Tooltip 
-                      formatter={(value: number) => formatCurrency(value)}
-                      contentStyle={{ backgroundColor: '#18181b', borderRadius: '12px', border: '1px solid #3f3f46', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.5)', color: '#fff' }}
-                      itemStyle={{ color: '#fff' }}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="totalAccumulated" 
-                      stroke="#A31616" 
-                      strokeWidth={3} 
-                      dot={{ r: 4, fill: '#A31616', strokeWidth: 2 }}
-                      activeDot={{ r: 6, strokeWidth: 0 }}
-                    >
-                      <LabelList 
+              <div className="h-[450px] w-full overflow-x-auto custom-scrollbar pb-4">
+                <div style={{ 
+                  minWidth: results.evolution.length > 13 ? `${results.evolution.length * 60}px` : '100%',
+                  height: '100%' 
+                }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={results.evolution} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#333" />
+                      <XAxis 
+                        dataKey="month" 
+                        axisLine={false} 
+                        tickLine={false} 
+                        tick={{ fontSize: 12, fill: '#666' }}
+                        label={{ value: periodType === 'years' ? 'Meses' : 'Período', position: 'insideBottom', offset: -10, fill: '#666' }}
+                      />
+                      <YAxis 
+                        axisLine={false} 
+                        tickLine={false} 
+                        tick={{ fontSize: 12, fill: '#666' }}
+                        tickFormatter={(value) => `R$ ${value >= 1000 ? (value / 1000).toFixed(0) + 'k' : value}`}
+                      />
+                      <Tooltip 
+                        formatter={(value: number) => formatCurrency(value)}
+                        contentStyle={{ backgroundColor: '#18181b', borderRadius: '12px', border: '1px solid #3f3f46', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.5)', color: '#fff' }}
+                        itemStyle={{ color: '#fff' }}
+                      />
+                      <Line 
+                        type="monotone" 
                         dataKey="totalAccumulated" 
-                        position="top" 
-                        fontSize={10} 
-                        fill="#A31616"
-                        formatter={(val: number) => formatCurrency(val)} 
-                      />
-                    </Line>
-                    <Line 
-                      type="monotone" 
-                      dataKey="totalInvested" 
-                      stroke="#f4f4f5" 
-                      strokeWidth={2} 
-                      dot={{ r: 4, fill: '#f4f4f5', strokeWidth: 2 }}
-                      activeDot={{ r: 4, strokeWidth: 0 }}
-                    >
-                      <LabelList 
+                        stroke="#A31616" 
+                        strokeWidth={3} 
+                        dot={{ r: 4, fill: '#A31616', strokeWidth: 2 }}
+                        activeDot={{ r: 6, strokeWidth: 0 }}
+                      >
+                        <LabelList 
+                          dataKey="totalAccumulated" 
+                          position="top" 
+                          fontSize={10} 
+                          fill="#A31616"
+                          formatter={(val: number) => formatCurrency(val)} 
+                        />
+                      </Line>
+                      <Line 
+                        type="monotone" 
                         dataKey="totalInvested" 
-                        position="bottom" 
-                        fontSize={10} 
-                        fill="#f4f4f5"
-                        formatter={(val: number) => formatCurrency(val)} 
-                      />
-                    </Line>
-                  </LineChart>
-                </ResponsiveContainer>
+                        stroke="#f4f4f5" 
+                        strokeWidth={2} 
+                        dot={{ r: 4, fill: '#f4f4f5', strokeWidth: 2 }}
+                        activeDot={{ r: 4, strokeWidth: 0 }}
+                      >
+                        <LabelList 
+                          dataKey="totalInvested" 
+                          position="bottom" 
+                          fontSize={10} 
+                          fill="#f4f4f5"
+                          formatter={(val: number) => formatCurrency(val)} 
+                        />
+                      </Line>
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
               </div>
             </div>
 
